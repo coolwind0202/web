@@ -39,7 +39,7 @@ export const PartialUserCard: React.VFC<PartialUserCardProps> = ({ children, cla
           <Grid item>
             <Typography
               component='h3'
-              sx={{ fontWeight: 'bold', fontSize: '1.5rem', lineHeight: '1' }}
+              sx={{ fontWeight: 'bold', fontSize: '1.3rem', lineHeight: '1' }}
             >
               <span className={styles.username}>{user.discord.username}</span>
               <span className={styles.discriminator}>#{user.discord.discriminator}</span>
