@@ -68,7 +68,9 @@ export const PartialUserCard: React.VFC<PartialUserCardProps> = ({ children, cla
                 paddingLeft: '0',
                 margin: '0',
                 lineHeight: '1',
-                overflowX: 'auto',
+                flexWrap: 'wrap',
+                overflow: 'hidden',
+                height: '32px',
               }}
               direction='row'
               spacing={1}
