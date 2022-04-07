@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { PartialUserCard } from '.';
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'model/user/PartialUserCard',
@@ -35,6 +36,12 @@ export default {
           'ダミーの自己紹介テキストです。自己紹介が長文の場合、...で省略表示されます。ダミーの自己紹介テキストです。自己紹介が長文の場合、...で省略表示されます。',
         friend_code: '0000-0000-0000',
       },
+    },
+    onClick: action('PartialUserCardがクリックされました'),
+    tagOnClick: (e) => {
+      action('UserTagがクリックされました')(e);
+      e.stopPropagation();
+      // UserTagはPartialUserCardの子要素のため、バブリングを止める
     },
   },
 } as ComponentMeta<typeof PartialUserCard>;

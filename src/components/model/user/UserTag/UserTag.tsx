@@ -8,7 +8,7 @@ type UserTagProps = {
   /** 表示するユーザータグ */
   tag: UserTagType;
   className?: string;
-  onClick: React.MouseEventHandler<HTMLDivElement>;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 };
 
 /**

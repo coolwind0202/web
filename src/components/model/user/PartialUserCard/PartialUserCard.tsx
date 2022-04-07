@@ -3,13 +3,15 @@ import clsx from 'clsx';
 import styles from './PartialUserCard.module.css';
 import type { User } from '@/types/user';
 import { UserTag } from '../UserTag';
-import { Avatar, Box, Grid, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Button, Grid, Stack, Typography, useTheme } from '@mui/material';
 
 type PartialUserCardProps = {
   children: React.ReactNode;
   className?: string;
   /** 表示するユーザー */
   user: User;
+  onClick?: React.MouseEventHandler<HTMLElement>;
+  tagOnClick?: React.MouseEventHandler<HTMLDivElement>;
 };
 
 /**
@@ -21,9 +23,28 @@ type PartialUserCardProps = {
  *
  * Mobileでの一覧表示に使います。
  */
-export const PartialUserCard: React.VFC<PartialUserCardProps> = ({ children, className, user }) => {
+export const PartialUserCard: React.VFC<PartialUserCardProps> = ({
+  children,
+  className,
+  user,
+  onClick,
+  tagOnClick,
+}) => {
+  const theme = useTheme();
   return (
-    <Box component='article' sx={{ width: '100%' }}>
+    <Button
+      component='article'
+      sx={{
+        width: '100%',
+        // MUIの独自スタイルを打ち消し.
+        textTransform: 'unset',
+        fontWeight: 'unset',
+        fontSize: 'unset',
+        color: 'unset',
+      }}
+      variant='text'
+      onClick={onClick}
+    >
       <Grid
         container
         direction='row'
@@ -39,7 +60,11 @@ export const PartialUserCard: React.VFC<PartialUserCardProps> = ({ children, cla
           <Grid item>
             <Typography
               component='h3'
-              sx={{ fontWeight: 'bold', fontSize: '1.3rem', lineHeight: '1' }}
+              sx={{
+                fontWeight: 'bold',
+                fontSize: '1.3rem',
+                lineHeight: '1',
+              }}
             >
               <span className={styles.username}>{user.discord.username}</span>
               <span className={styles.discriminator}>#{user.discord.discriminator}</span>
@@ -77,13 +102,13 @@ export const PartialUserCard: React.VFC<PartialUserCardProps> = ({ children, cla
             >
               {user.profile.tags.map((tag) => (
                 <li key={tag.id}>
-                  <UserTag onClick={() => {}} tag={tag} />
+                  <UserTag onClick={tagOnClick} tag={tag} />
                 </li>
               ))}
             </Stack>
           </Grid>
         </Grid>
       </Grid>
-    </Box>
+    </Button>
   );
 };
