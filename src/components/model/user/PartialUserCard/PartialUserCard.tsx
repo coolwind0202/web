@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import styles from './PartialUserCard.module.css';
 import type { User } from '@/types/user';
 import { UserTag } from '../UserTag';
-import { Avatar, Box, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Grid, Stack, Typography } from '@mui/material';
 
 type PartialUserCardProps = {
   children: React.ReactNode;
@@ -23,46 +23,65 @@ type PartialUserCardProps = {
  */
 export const PartialUserCard: React.VFC<PartialUserCardProps> = ({ children, className, user }) => {
   return (
-    <Box component='article'>
-      <Stack direction='row' spacing={0} alignItems='flex-start' sx={{ gap: '1rem' }}>
-        <Avatar src={user.discord.avatar_url} sx={{ width: '3.5rem', height: '3.5rem' }} />
-        <Stack sx={{ gap: '0' }}>
-          <Typography
-            component='h3'
-            sx={{ fontWeight: 'bold', fontSize: '1.5rem', lineHeight: '1' }}
-          >
-            {user.discord.username}#{user.discord.discriminator}
-          </Typography>
+    <Box component='article' sx={{ width: '100%' }}>
+      <Grid
+        container
+        direction='row'
+        spacing={0}
+        alignItems='flex-start'
+        sx={{ gap: '1rem', width: '100%' }}
+        wrap='nowrap'
+      >
+        <Grid item>
+          <Avatar src={user.discord.avatar_url} sx={{ width: '3.5rem', height: '3.5rem' }} />
+        </Grid>
+        <Grid sx={{ minWidth: '0' }} container item direction='column' wrap='nowrap'>
+          <Grid item>
+            <Typography
+              component='h3'
+              sx={{ fontWeight: 'bold', fontSize: '1.5rem', lineHeight: '1' }}
+            >
+              <span className={styles.username}>{user.discord.username}</span>
+              <span className={styles.discriminator}>#{user.discord.discriminator}</span>
+            </Typography>
+          </Grid>
 
-          <Typography
-            variant='subtitle1'
-            sx={{
-              fontSize: '0.8rem',
-              opacity: '0.8',
-              maxWidth: '20rem',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-            }}
-            gutterBottom
-          >
-            {user.profile.about}
-          </Typography>
+          <Grid item zeroMinWidth xs>
+            <Typography
+              variant='subtitle1'
+              sx={{
+                fontSize: '0.8rem',
+                opacity: '0.8',
+              }}
+              noWrap
+              gutterBottom
+            >
+              {user.profile.about}
+            </Typography>
+          </Grid>
 
-          <Stack
-            component='ul'
-            sx={{ listStyle: 'none', paddingLeft: '0', margin: '0', lineHeight: '1' }}
-            direction='row'
-            spacing={1}
-          >
-            {user.profile.tags.map((tag) => (
-              <li key={tag.id}>
-                <UserTag onClick={() => {}} tag={tag} />
-              </li>
-            ))}
-          </Stack>
-        </Stack>
-      </Stack>
+          <Grid item>
+            <Stack
+              component='ul'
+              sx={{
+                listStyle: 'none',
+                paddingLeft: '0',
+                margin: '0',
+                lineHeight: '1',
+                overflowX: 'auto',
+              }}
+              direction='row'
+              spacing={1}
+            >
+              {user.profile.tags.map((tag) => (
+                <li key={tag.id}>
+                  <UserTag onClick={() => {}} tag={tag} />
+                </li>
+              ))}
+            </Stack>
+          </Grid>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

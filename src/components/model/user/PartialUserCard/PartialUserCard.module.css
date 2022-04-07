@@ -1,2 +1,10 @@
 .root {
 }
+
+.username {
+  word-wrap: break-word;
+}
+
+.discriminator {
+  white-space: nowrap;
+}
