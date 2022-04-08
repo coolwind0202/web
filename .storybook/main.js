@@ -27,4 +27,5 @@ module.exports = {
     delete config.resolve.alias['@emotion/core'];
     return config;
   },
+  staticDirs: ['../public'],
 };
