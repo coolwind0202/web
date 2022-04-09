@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   justify-items: center;
+  row-gap: 4rem;
 }
 
 .content {
@@ -24,4 +25,8 @@
   .content {
     grid-column: 3 / 11;
   }
+}
+
+.link {
+  font-weight: bold;
 }
