@@ -83,28 +83,30 @@ export const PartialUserCard: React.VFC<PartialUserCardProps> = ({
             </Typography>
           </Grid>
 
-          <Grid item>
-            <Stack
-              component='ul'
-              sx={{
-                listStyle: 'none',
-                paddingLeft: '0',
-                margin: '0',
-                lineHeight: '1',
-                flexWrap: 'wrap',
-                overflow: 'hidden',
-                height: '32px',
-              }}
-              direction='row'
-              spacing={1}
-            >
-              {user.profile.tags.map((tag) => (
-                <li key={tag.id}>
-                  <UserTag onClick={tagOnClick} tag={tag} />
-                </li>
-              ))}
-            </Stack>
-          </Grid>
+          {user.profile.tags.length > 0 && (
+            <Grid item>
+              <Stack
+                component='ul'
+                sx={{
+                  listStyle: 'none',
+                  paddingLeft: '0',
+                  margin: '0',
+                  lineHeight: '1',
+                  flexWrap: 'wrap',
+                  overflow: 'hidden',
+                  height: '32px',
+                }}
+                direction='row'
+                spacing={1}
+              >
+                {user.profile.tags.map((tag) => (
+                  <li key={tag.id}>
+                    <UserTag onClick={tagOnClick} tag={tag} />
+                  </li>
+                ))}
+              </Stack>
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </Button>
