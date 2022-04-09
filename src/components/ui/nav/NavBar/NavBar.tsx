@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Slide from '@mui/material/Slide';
 import Image from 'next/image';
-import { Stack } from '@mui/material';
+import { Avatar, IconButton, Stack, Tooltip } from '@mui/material';
 
 interface Props {
   /**
@@ -40,35 +40,36 @@ function HideOnScroll(props: Props) {
 type NavBarProps = {
   children: React.ReactNode;
   className?: string;
+  avatar_url?: string;
 };
 
-export const NavBar: React.VFC<NavBarProps> = ({ children, className }) => {
+export const NavBar: React.VFC<NavBarProps> = ({ children, className, avatar_url }) => {
   return (
     <div className={clsx(className, styles.root)}>
       <CssBaseline />
       <HideOnScroll>
-        <AppBar sx={{ height: '4rem', justifyContent: 'center' }} elevation={0}>
-          <Toolbar sx={{ gap: '10px' }}>
-            <Box sx={{ aspectRatio: '1', position: 'relative', height: '100%' }}>
+        <AppBar sx={{ height: '4rem', justifyContent: 'center', flexGrow: 1 }} color='secondary'>
+          <Toolbar sx={{ gap: '0.4rem' }}>
+            <Box sx={{ aspectRatio: '1', position: 'relative', height: '97%' }}>
               <Image src='/server_icon.png' layout='fill' className={styles.icon} />
             </Box>
-            <Stack direction='column'>
-              <Typography variant='h1' sx={{ lineHeight: 1, fontSize: '0.8rem', opacity: '0.8' }}>
-                White-Lucida
-              </Typography>
-              <Typography variant='h1' component='div' sx={{ lineHeight: 1, fontSize: '1.6rem' }}>
-                Members
-              </Typography>
-            </Stack>
+            <Typography
+              variant='h1'
+              component='div'
+              sx={{ lineHeight: 1, color: 'white', flexGrow: 1 }}
+            >
+              メンバー検索
+            </Typography>
+            <Tooltip title='ユーザー設定'>
+              <IconButton>
+                <Avatar src={avatar_url} />
+              </IconButton>
+            </Tooltip>
           </Toolbar>
         </AppBar>
       </HideOnScroll>
       <Toolbar sx={{ height: '4rem' }} />
-      <Container>
-        <Box sx={{ my: 2, gap: 2 }} display='flex' flexDirection='column' alignItems='center'>
-          {children}
-        </Box>
-      </Container>
+      <Box sx={{ my: 2 }}>{children}</Box>
     </div>
   );
 };

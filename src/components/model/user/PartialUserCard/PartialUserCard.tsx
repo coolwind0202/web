@@ -6,7 +6,6 @@ import { UserTag } from '../UserTag';
 import { Avatar, Box, Button, Grid, Stack, Typography, useTheme } from '@mui/material';
 
 type PartialUserCardProps = {
-  children: React.ReactNode;
   className?: string;
   /** 表示するユーザー */
   user: User;
@@ -24,7 +23,6 @@ type PartialUserCardProps = {
  * Mobileでの一覧表示に使います。
  */
 export const PartialUserCard: React.VFC<PartialUserCardProps> = ({
-  children,
   className,
   user,
   onClick,

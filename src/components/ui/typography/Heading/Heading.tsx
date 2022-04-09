@@ -11,7 +11,7 @@ type HeadingProps = {
 export const Heading: React.VFC<HeadingProps> = ({ children, className }) => {
   return (
     <div className={clsx(className, styles.root)}>
-      <Typography variant='h1'>{children}</Typography>
+      <Typography variant='h2'>{children}</Typography>
     </div>
   );
 };
