@@ -69,7 +69,7 @@ export const NavBar: React.VFC<NavBarProps> = ({ children, className, avatar_url
         </AppBar>
       </HideOnScroll>
       <Toolbar sx={{ height: '4rem' }} />
-      <Box sx={{ my: 2 }}>{children}</Box>
+      <Box sx={{ my: 4 }}>{children}</Box>
     </div>
   );
 };
