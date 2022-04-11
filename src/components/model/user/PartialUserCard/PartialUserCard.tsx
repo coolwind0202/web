@@ -1,16 +1,17 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './PartialUserCard.module.css';
-import type { User } from '@/types/user';
+import type { User, UserTag as UserTagType } from '@/types/user';
 import { UserTag } from '../UserTag';
 import { Avatar, Box, Button, Grid, Stack, Typography, useTheme } from '@mui/material';
+import { UserTagList } from '../UserTagList';
 
 type PartialUserCardProps = {
   className?: string;
   /** 表示するユーザー */
   user: User;
-  onClick?: React.MouseEventHandler<HTMLElement>;
-  tagOnClick?: React.MouseEventHandler<HTMLDivElement>;
+  onClick?: (user: User) => void;
+  tagOnClick?: (tag: UserTagType) => void;
 };
 
 /**
@@ -25,8 +26,8 @@ type PartialUserCardProps = {
 export const PartialUserCard: React.VFC<PartialUserCardProps> = ({
   className,
   user,
-  onClick,
-  tagOnClick,
+  onClick = () => {},
+  tagOnClick = () => {},
 }) => {
   const theme = useTheme();
   return (
@@ -41,7 +42,7 @@ export const PartialUserCard: React.VFC<PartialUserCardProps> = ({
         color: 'unset',
       }}
       variant='text'
-      onClick={onClick}
+      onClick={() => onClick(user)}
     >
       <Grid
         container
@@ -85,26 +86,7 @@ export const PartialUserCard: React.VFC<PartialUserCardProps> = ({
 
           {user.profile.tags.length > 0 && (
             <Grid item>
-              <Stack
-                component='ul'
-                sx={{
-                  listStyle: 'none',
-                  paddingLeft: '0',
-                  margin: '0',
-                  lineHeight: '1',
-                  flexWrap: 'wrap',
-                  overflow: 'hidden',
-                  height: '32px',
-                }}
-                direction='row'
-                spacing={1}
-              >
-                {user.profile.tags.map((tag) => (
-                  <li key={tag.id}>
-                    <UserTag onClick={tagOnClick} tag={tag} />
-                  </li>
-                ))}
-              </Stack>
+              <UserTagList tags={user.profile.tags} onClick={tagOnClick} />
             </Grid>
           )}
         </Grid>
