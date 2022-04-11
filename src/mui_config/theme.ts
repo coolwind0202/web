@@ -1,37 +1,45 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#86c3ff",
-      contrastText: "white",
+      main: '#86c3ff',
+      contrastText: 'white',
     },
     secondary: {
-      main: "#202225",
-      contrastText: "white",
+      main: '#202225',
+      contrastText: 'white',
     },
     warning: {
-      main: "#ff8686",
-      contrastText: "white",
+      main: '#ff8686',
+      contrastText: 'white',
     },
     info: {
-      main: "#707070",
-      contrastText: "white",
+      main: '#707070',
+      contrastText: 'white',
     },
     text: {
-      primary: "#707070",
+      primary: '#707070',
     },
   },
   typography: {
     h1: {
       fontFamily: '"BIZ UDGothic", sans-serif',
       fontWeight: 700,
-      fontSize: "1.2rem",
+      lineHeight: 1.5,
+      fontSize: '1.2rem',
     },
     h2: {
       fontFamily: '"Noto Sans JP", sans-serif',
       fontWeight: 900,
-      fontSize: "1.3rem",
+      lineHeight: 1.5,
+      fontSize: '1.3rem',
+    },
+    h3: {
+      fontFamily: '"Noto Sans JP", sans-serif',
+      fontWeight: 900,
+      lineHeight: 1.5,
+      fontSize: '1rem',
     },
     button: {
       fontFamily: '"Noto Sans JP", sans-serif',
