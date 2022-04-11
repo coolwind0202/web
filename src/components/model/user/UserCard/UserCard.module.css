@@ -6,6 +6,7 @@
   height: unset;
 }
 
-.discriminator {
+.discriminator,
+.notRegistered {
   opacity: 0.8;
 }

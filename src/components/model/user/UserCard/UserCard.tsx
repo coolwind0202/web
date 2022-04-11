@@ -46,7 +46,13 @@ export const UserCard: React.VFC<UserCardProps> = ({ className, user, tagOnClick
             </>
           )}
           <Typography variant='h3'>フレンドコード</Typography>
-          <Typography>{user.profile.friend_code}</Typography>
+          <Typography>
+            {user.profile.friend_code ? (
+              user.profile.friend_code
+            ) : (
+              <span className={styles.notRegistered}>登録されていません</span>
+            )}
+          </Typography>
         </Stack>
       </Stack>
     </div>
