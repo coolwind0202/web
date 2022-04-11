@@ -53,5 +53,33 @@ Primary.args = {
         friend_code: '',
       },
     },
+    {
+      discord: {
+        username: 'User-3',
+        discriminator: '3000',
+        avatar_url: 'https://pbs.twimg.com/media/Dpw-95kUwAAswNa.jpg',
+      },
+      profile: {
+        about: '自己紹介テキスト',
+        tags: [
+          {
+            name: 'Tag-1',
+            id: '1',
+            color: '#707070',
+          },
+          {
+            name: 'Tag-2',
+            id: '2',
+            color: '#707070',
+          },
+          {
+            name: 'Tag-3',
+            id: '3',
+            color: '#707070',
+          },
+        ],
+        friend_code: '',
+      },
+    },
   ],
 };
