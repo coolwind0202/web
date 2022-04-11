@@ -3,7 +3,7 @@ module.exports = [
     type: 'select',
     name: 'directory',
     message: 'ディレクトリ名を選択してください。',
-    choices: ['ui', 'model'],
+    choices: ['ui', 'model', 'page'],
   },
   {
     type: 'input',
