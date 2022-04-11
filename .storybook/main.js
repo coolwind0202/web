@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   typescript: {
     // .storybook/main.js
@@ -15,6 +17,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
   ],
+
   framework: '@storybook/react',
   core: {
     builder: '@storybook/builder-webpack5',
@@ -25,6 +28,11 @@ module.exports = {
     delete config.resolve.alias['emotion-theming'];
     delete config.resolve.alias['@emotion/styled'];
     delete config.resolve.alias['@emotion/core'];
+
+    config.resolve.alias = {
+      '@': path.resolve(__dirname, '../src'), // こっちは私の趣味です
+    };
+
     return config;
   },
   staticDirs: ['../public'],
