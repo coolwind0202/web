@@ -1,0 +1,11 @@
+.root {
+}
+
+.tagList {
+  overflow: auto;
+  height: unset;
+}
+
+.discriminator {
+  opacity: 0.8;
+}
