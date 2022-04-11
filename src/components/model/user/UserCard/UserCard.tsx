@@ -6,11 +6,19 @@ import { Avatar, Divider, Paper, Stack, Typography } from '@mui/material';
 import { UserTagList } from '../UserTagList';
 
 type UserCardProps = {
+  /** 表示したいユーザー */
   user: User;
   className?: string;
+  /**
+   * タグがクリックされたときの処理.
+   */
   tagOnClick?: (tag: UserTag) => void;
 };
 
+/**
+ * ユーザーを表示するコンポーネント。
+ * 他の要素の入れ子にして使うことを想定しています。
+ */
 export const UserCard: React.VFC<UserCardProps> = ({ className, user, tagOnClick = () => {} }) => {
   return (
     <div className={clsx(className, styles.root)}>
@@ -24,7 +32,9 @@ export const UserCard: React.VFC<UserCardProps> = ({ className, user, tagOnClick
         </Stack>
         <Stack spacing={1} sx={{ px: 2.2, pt: 1.2, pb: 2.5 }}>
           <Typography variant='h3'>自己紹介</Typography>
-          <Typography sx={{ fontSize: '0.9rem' }}>{user.profile.about}</Typography>
+          <Typography sx={{ fontSize: '0.9rem', whiteSpace: 'pre-wrap' }}>
+            {user.profile.about}
+          </Typography>
           {user.profile.tags.length > 0 && (
             <>
               <Typography variant='h3'>タグ</Typography>

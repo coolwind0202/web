@@ -10,7 +10,9 @@ type PartialUserCardProps = {
   className?: string;
   /** 表示するユーザー */
   user: User;
+  /** カードをクリックしたときの処理 */
   onClick?: (user: User) => void;
+  /** タグをクリックしたときの処理 */
   tagOnClick?: (tag: UserTagType) => void;
 };
 

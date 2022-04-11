@@ -8,10 +8,15 @@ import { useTheme } from '@mui/system';
 
 type UserTagListProps = {
   className?: string;
+  /** 表示するユーザータグの配列 */
   tags: UserTagType[];
+  /** タグがクリックされたときの処理 */
   onClick: (tag: UserTagType) => void;
 };
 
+/**
+ * ユーザータグの配列を表示するためのコンポーネント
+ */
 export const UserTagList: React.VFC<UserTagListProps> = ({ className, tags, onClick }) => {
   const theme = useTheme();
   return (

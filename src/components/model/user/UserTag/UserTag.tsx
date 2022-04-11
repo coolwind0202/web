@@ -8,7 +8,7 @@ type UserTagProps = {
   /** 表示するユーザータグ */
   tag: UserTagType;
   className?: string;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onClick?: (tag: UserTagType) => void;
 };
 
 /**
@@ -24,7 +24,7 @@ export const UserTag: React.VFC<UserTagProps> = ({ tag, className = '', onClick 
         </Avatar>
       }
       sx={{ border: `2px solid ${tag.color}`, backgroundColor: 'transparent' }}
-      onClick={onClick}
+      onClick={() => onClick(tag)}
     />
   );
 };

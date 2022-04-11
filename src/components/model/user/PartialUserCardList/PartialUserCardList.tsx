@@ -7,11 +7,17 @@ import { PartialUserCard } from '../PartialUserCard/PartialUserCard';
 
 type PartialUserCardListProps = {
   className?: string;
+  /** 表示するユーザーの配列 */
   users: User[];
+  /** カードをクリックしたときの処理 */
   onClick?: (user: User) => void;
+  /** タグをクリックしたときの処理 */
   tagOnClick?: (tag: UserTag) => void;
 };
 
+/**
+ * `PartialUserCard`の配列を表示するためのコンポーネント
+ */
 export const PartialUserCardList: React.VFC<PartialUserCardListProps> = ({
   className,
   users,

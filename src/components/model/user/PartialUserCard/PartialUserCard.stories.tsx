@@ -40,8 +40,6 @@ export default {
     onClick: action('PartialUserCardがクリックされました'),
     tagOnClick: (e) => {
       action('UserTagがクリックされました')(e);
-      e.stopPropagation();
-      // UserTagはPartialUserCardの子要素のため、バブリングを止める
     },
   },
 } as ComponentMeta<typeof PartialUserCard>;
