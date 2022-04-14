@@ -6,6 +6,40 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model DiscordUser {
+  id            Int       @id @default(autoincrement())
+  discord_id    String    @unique
+  username      String
+  discriminator String    @db.Char(4)
+  avatar_url    String?
+  Profile       Profile[]
+}
+
+model Profile {
+  id            Int          @id @default(autoincrement())
+  discord_user  DiscordUser  @relation(fields: [discordUserId], references: [id])
+  about         String?
+  friend_code   String
+  tagId         Int
+  ProfileTag    ProfileTag[]
+  discordUserId Int
+}
+
+model Tag {
+  id         Int          @id @default(autoincrement())
+  name       String
+  color      String       @db.Char(6)
+  ProfileTag ProfileTag[]
+}
+
+model ProfileTag {
+  id        Int     @id @default(autoincrement())
+  profile   Profile @relation(fields: [profileId], references: [id])
+  profileId Int
+  tag       Tag     @relation(fields: [tagId], references: [id])
+  tagId     Int
 }
