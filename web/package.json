@@ -17,6 +17,7 @@
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.5.3",
+    "@prisma/client": "^3.12.0",
     "@storybook/addon-docs": "^6.5.0-alpha.55",
     "hygen": "^6.2.0",
     "next": "12.1.4",
@@ -41,7 +42,8 @@
     "chromatic": "^6.5.3",
     "eslint": "8.12.0",
     "eslint-config-next": "12.1.4",
-    "typescript": "4.6.3"
+    "typescript": "4.6.3",
+    "webpack": "^5"
   },
   "resolutions": {
     "@storybook/react/webpack": "^5",

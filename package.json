@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "devDependencies": {
+    "prisma": "^3.12.0",
+    "ts-node": "^10.7.0"
+  },
+  "workspaces": [
+    "web"
+  ]
+}

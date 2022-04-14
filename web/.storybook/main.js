@@ -30,7 +30,7 @@ module.exports = {
     delete config.resolve.alias['@emotion/core'];
 
     config.resolve.alias = {
-      '@': path.resolve(__dirname, '../src'), // こっちは私の趣味です
+      '@': path.resolve(__dirname, '../src'),
     };
 
     return config;
