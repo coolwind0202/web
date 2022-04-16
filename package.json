@@ -6,5 +6,8 @@
   },
   "workspaces": [
     "web"
-  ]
+  ],
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  }
 }
