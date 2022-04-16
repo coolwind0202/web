@@ -24,7 +24,6 @@ model Profile {
   discord_user  DiscordUser  @relation(fields: [discordUserId], references: [id])
   about         String?
   friend_code   String
-  tagId         Int
   ProfileTag    ProfileTag[]
   discordUserId Int
 }
@@ -32,7 +31,8 @@ model Profile {
 model Tag {
   id         Int          @id @default(autoincrement())
   name       String
-  color      String       @db.Char(6)
+  color      String
+  src        String?
   ProfileTag ProfileTag[]
 }
 

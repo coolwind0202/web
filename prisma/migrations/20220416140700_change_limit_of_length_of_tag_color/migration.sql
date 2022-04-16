@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Tag` MODIFY `color` VARCHAR(191) NOT NULL;

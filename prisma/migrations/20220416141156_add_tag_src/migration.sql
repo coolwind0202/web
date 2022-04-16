@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Tag` ADD COLUMN `src` VARCHAR(191) NULL;
