@@ -1,21 +1,22 @@
-import type { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import { IndexPage } from '@/components/page/members/IndexPage';
+import { ComponentProps } from 'react';
+import { getUsers } from '@/lib/prisma';
 
-const Home: NextPage = () => {
-  const users = [...Array(5)].map((_, i) => ({
-    discord: {
-      username: 'User Name',
-      discriminator: '0000',
-      avatar_url: 'https://i.pinimg.com/originals/52/d1/13/52d11372df35fd96aab8f6827e1ce205.jpg',
-    },
-    profile: {
-      about: 'テキスト',
-      friend_code: '1234-1234-1234',
-      tags: [...Array(i)].map((_, j) => ({ color: '#707070', name: 'ガチすぎる', id: `${j}` })),
-    },
-  }));
+type HomeProps = ComponentProps<typeof IndexPage>;
 
-  return <IndexPage users={users} />;
+const Home: NextPage<HomeProps> = (props) => {
+  return <IndexPage {...props} />;
+};
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const users = await getUsers();
+
+  return {
+    props: {
+      users: users ?? [],
+    },
+  };
 };
 
 export default Home;
