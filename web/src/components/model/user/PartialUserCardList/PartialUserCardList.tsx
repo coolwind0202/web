@@ -1,18 +1,19 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './PartialUserCardList.module.css';
-import { User, UserTag } from '@/types/user';
 import { Stack } from '@mui/material';
 import { PartialUserCard } from '../PartialUserCard/PartialUserCard';
+import { DiscordUser, Tag } from '@prisma/client';
+import { DiscordUserWithProfile } from '@/lib/prisma';
 
 type PartialUserCardListProps = {
   className?: string;
   /** 表示するユーザーの配列 */
-  users: User[];
+  users: DiscordUserWithProfile[];
   /** カードをクリックしたときの処理 */
-  onClick?: (user: User) => void;
+  onClick?: (user: DiscordUserWithProfile) => void;
   /** タグをクリックしたときの処理 */
-  tagOnClick?: (tag: UserTag) => void;
+  tagOnClick?: (tag: Tag) => void;
 };
 
 /**

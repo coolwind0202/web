@@ -1,19 +1,19 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './PartialUserCard.module.css';
-import type { User, UserTag as UserTagType } from '@/types/user';
-import { UserTag } from '../UserTag';
-import { Avatar, Box, Button, Grid, Stack, Typography, useTheme } from '@mui/material';
+import { Avatar, Button, Grid, Typography, useTheme } from '@mui/material';
 import { UserTagList } from '../UserTagList';
+import { Tag } from '@prisma/client';
+import { DiscordUserWithProfile } from '@/lib/prisma';
 
 type PartialUserCardProps = {
   className?: string;
   /** 表示するユーザー */
-  user: User;
+  user: DiscordUserWithProfile;
   /** カードをクリックしたときの処理 */
-  onClick?: (user: User) => void;
+  onClick?: (user: DiscordUserWithProfile) => void;
   /** タグをクリックしたときの処理 */
-  tagOnClick?: (tag: UserTagType) => void;
+  tagOnClick?: (tag: Tag) => void;
 };
 
 /**
@@ -55,7 +55,7 @@ export const PartialUserCard: React.VFC<PartialUserCardProps> = ({
         wrap='nowrap'
       >
         <Grid item>
-          <Avatar src={user.discord.avatar_url} sx={{ width: '3.5rem', height: '3.5rem' }} />
+          <Avatar src={user.avatar_url} sx={{ width: '3.5rem', height: '3.5rem' }} />
         </Grid>
         <Grid sx={{ minWidth: '0' }} container item direction='column' wrap='nowrap'>
           <Grid item>
@@ -67,8 +67,8 @@ export const PartialUserCard: React.VFC<PartialUserCardProps> = ({
                 lineHeight: '1',
               }}
             >
-              <span className={styles.username}>{user.discord.username}</span>
-              <span className={styles.discriminator}>#{user.discord.discriminator}</span>
+              <span className={styles.username}>{user.username}</span>
+              <span className={styles.discriminator}>#{user.discriminator}</span>
             </Typography>
           </Grid>
 
@@ -82,13 +82,16 @@ export const PartialUserCard: React.VFC<PartialUserCardProps> = ({
               noWrap
               gutterBottom
             >
-              {user.profile.about}
+              {user.Profile?.about ?? ''}
             </Typography>
           </Grid>
 
-          {user.profile.tags.length > 0 && (
+          {user.Profile?.ProfileTag?.length && (
             <Grid item>
-              <UserTagList tags={user.profile.tags} onClick={tagOnClick} />
+              <UserTagList
+                tags={user.Profile.ProfileTag.map((profileTagRelation) => profileTagRelation.tag)}
+                onClick={tagOnClick}
+              />
             </Grid>
           )}
         </Grid>

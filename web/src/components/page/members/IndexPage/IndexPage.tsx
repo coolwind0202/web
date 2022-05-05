@@ -6,10 +6,10 @@ import { PartialUserCardList } from '@/components/model/user/PartialUserCardList
 import { PageLink } from '@/components/ui/nav/PageLink';
 import { ComponentProps, useState } from 'react';
 import { UserCardModal } from '@/components/model/user/UserCardModal';
-import { User } from '@/types/user';
+import { DiscordUserWithProfile } from '@/lib/prisma';
 
 type HomeProps = {
-  users: User[];
+  users: DiscordUserWithProfile[];
 };
 
 const Link = (props: ComponentProps<typeof PageLink>) => (
@@ -17,7 +17,7 @@ const Link = (props: ComponentProps<typeof PageLink>) => (
 );
 
 export const IndexPage: React.VFC<HomeProps> = ({ users }) => {
-  const [modalUser, setModalUser] = useState<User | null>(null);
+  const [modalUser, setModalUser] = useState<DiscordUserWithProfile | null>(null);
   return (
     <>
       {modalUser && (

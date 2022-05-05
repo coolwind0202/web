@@ -2,13 +2,13 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './UserTag.module.css';
 import { Avatar, Chip } from '@mui/material';
-import type { UserTag as UserTagType } from '@/types/user';
+import { Tag } from '@prisma/client';
 
 type UserTagProps = {
   /** 表示するユーザータグ */
-  tag: UserTagType;
+  tag: Tag;
   className?: string;
-  onClick?: (tag: UserTagType) => void;
+  onClick?: (tag: Tag) => void;
 };
 
 /**
@@ -19,7 +19,7 @@ export const UserTag: React.VFC<UserTagProps> = ({ tag, className = '', onClick 
     <Chip
       label={tag.name}
       avatar={
-        <Avatar sx={{ backgroundColor: tag.color }} src={tag.src}>
+        <Avatar sx={{ backgroundColor: tag.color }} src={tag.src ?? undefined}>
           {' '}
         </Avatar>
       }

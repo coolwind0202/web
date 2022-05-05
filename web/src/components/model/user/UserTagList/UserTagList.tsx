@@ -2,16 +2,16 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './UserTagList.module.css';
 import { Stack } from '@mui/material';
-import type { UserTag as UserTagType } from '@/types/user';
 import { UserTag } from '@/components/model/user/UserTag';
 import { useTheme } from '@mui/system';
+import { Tag } from '@prisma/client';
 
 type UserTagListProps = {
   className?: string;
   /** 表示するユーザータグの配列 */
-  tags: UserTagType[];
+  tags: Tag[];
   /** タグがクリックされたときの処理 */
-  onClick: (tag: UserTagType) => void;
+  onClick: (tag: Tag) => void;
 };
 
 /**

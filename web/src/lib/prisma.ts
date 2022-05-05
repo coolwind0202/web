@@ -1,4 +1,3 @@
-import { User } from "@/types/user";
 import { excludeNull } from "@/utils/filter";
 import { Prisma, PrismaClient } from "@prisma/client";
 
@@ -21,7 +20,7 @@ const discordUserWithProfile = Prisma.validator<Prisma.DiscordUserArgs>()({
   },
 });
 
-type discordUserType = Prisma.DiscordUserGetPayload<
+export type DiscordUserWithProfile = Prisma.DiscordUserGetPayload<
   typeof discordUserWithProfile
 >;
 
@@ -30,7 +29,9 @@ type discordUserType = Prisma.DiscordUserGetPayload<
  * @param discord_id 取得するユーザーのDiscord ID
  * @returns `User`または`null`のPromise
  */
-const getUser = async (discord_id: string): Promise<User | null> => {
+const getUser = async (
+  discord_id: string,
+): Promise<DiscordUserWithProfile | null> => {
   const result = await prisma.discordUser.findUnique({
     where: { discord_id },
     include: {
@@ -38,14 +39,14 @@ const getUser = async (discord_id: string): Promise<User | null> => {
     },
   });
 
-  return result !== null ? convertUser(result) : null;
+  return result;
 };
 
 /**
  * データベースから`User`オブジェクトのリストを取得します。
  * @returns `User`のリストのPromise
  */
-const getUsers = async (): Promise<User[]> => {
+const getUsers = async (): Promise<DiscordUserWithProfile[]> => {
   const result = await prisma.discordUser.findMany({
     include: {
       Profile: {
@@ -59,38 +60,7 @@ const getUsers = async (): Promise<User[]> => {
       },
     },
   });
-  return excludeNull(result.map((user) => convertUser(user)));
-};
-
-/**
- * データベースで取得した`DiscordUser`オブジェクトを`User`オブジェクトに整形します。
- * @param user 整形したい`DiscordUser`オブジェクト
- * @returns `user`が`null`の場合は`null`、それ以外は`User`
- */
-const convertUser = (
-  user: discordUserType,
-): User | null => {
-  if (user === null) return null;
-  const profile = user.Profile[0];
-
-  // `User`オブジェクトに作り変える
-  return {
-    discord: {
-      username: user.username,
-      discriminator: user.discriminator,
-      avatar_url: user.avatar_url ?? undefined,
-    },
-    profile: {
-      about: profile.about ?? "",
-      friend_code: profile.friend_code,
-      tags: profile.ProfileTag.map((tag) => ({
-        id: tag.tag.id.toString(),
-        name: tag.tag.name,
-        color: tag.tag.color,
-        src: tag.tag.src ?? undefined,
-      })),
-    },
-  };
+  return excludeNull(result);
 };
 
 export { getUser, getUsers };

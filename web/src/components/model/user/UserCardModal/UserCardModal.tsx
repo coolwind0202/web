@@ -1,14 +1,13 @@
-import React, { ComponentProps } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import styles from './UserCardModal.module.css';
-import { Dialog, Paper, PaperProps, useMediaQuery } from '@mui/material';
-import { User } from '@/types/user';
+import { Dialog, Paper, PaperProps } from '@mui/material';
 import { UserCard } from '../UserCard/UserCard';
-import { useTheme } from '@mui/system';
+import { DiscordUserWithProfile } from '@/lib/prisma';
 
 type UserCardModalProps = {
   /** カードに表示するユーザー */
-  user: User;
+  user: DiscordUserWithProfile;
   /** モーダルが開いてるかどうか */
   open: boolean;
   /** モーダルを閉じる際の処理 */
