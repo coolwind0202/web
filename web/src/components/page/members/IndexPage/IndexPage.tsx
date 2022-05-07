@@ -9,6 +9,7 @@ import { UserCardModal } from '@/components/model/user/UserCardModal';
 import { DiscordUserWithProfile } from '@/lib/prisma';
 import { useUserParameter } from '@/lib/hooks/useUserParameter';
 import { useRouter } from 'next/router';
+import { useTagListTab } from '@/lib/hooks/useTagListTab';
 
 type HomeProps = {
   users: DiscordUserWithProfile[];
@@ -19,9 +20,10 @@ const Link = (props: ComponentProps<typeof PageLink>) => (
 );
 
 export const IndexPage: React.VFC<HomeProps> = ({ users }) => {
-  // const [modalUser, setModalUser] = useState<DiscordUserWithProfile | null>(null);
   const modalUser = useUserParameter(users);
   const router = useRouter();
+  const { currentTab, tags, onTabChange } = useTagListTab(users);
+  console.log(currentTab);
   const onUserCardClicked = (user: DiscordUserWithProfile) => {
     router.push({
       pathname: '/',
