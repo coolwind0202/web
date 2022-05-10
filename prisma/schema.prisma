@@ -10,36 +10,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model DiscordUser {
-  id            Int      @id @default(autoincrement())
-  discord_id    String   @unique
-  username      String
-  discriminator String   @db.Char(4)
-  avatar_url    String
-  Profile       Profile?
+model MemberAccount {
+  id                  Int                @id @default(autoincrement())
+  profile             MemberProfile?     @relation(fields: [memberProfileId], references: [id])
+  discord_user        MemberDiscordUser? @relation(fields: [memberDiscordUserId], references: [id])
+  memberProfileId     Int?
+  memberDiscordUserId Int?
 }
 
-model Profile {
-  id            Int          @id @default(autoincrement())
-  discord_user  DiscordUser  @relation(fields: [discordUserId], references: [id])
-  about         String?
+model MemberProfile {
+  id            Int             @id @default(autoincrement())
+  bio           String
   friend_code   String
-  ProfileTag    ProfileTag[]
-  discordUserId Int          @unique
+  clusters      MemberCluster[]
+  MemberAccount MemberAccount[]
 }
 
-model Tag {
-  id         Int          @id @default(autoincrement())
-  name       String
-  color      String
-  src        String?
-  ProfileTag ProfileTag[]
+model MemberDiscordUser {
+  id            Int             @id @default(autoincrement())
+  discord_id    String          @unique
+  username      String
+  discriminator String          @db.Char(4)
+  avatar_url    String
+  MemberAccount MemberAccount[]
 }
 
-model ProfileTag {
-  id        Int     @id @default(autoincrement())
-  profile   Profile @relation(fields: [profileId], references: [id])
-  profileId Int
-  tag       Tag     @relation(fields: [tagId], references: [id])
-  tagId     Int
+model MemberCluster {
+  id       Int             @id @default(autoincrement())
+  icon_url String?
+  name     String
+  color    String
+  members  MemberProfile[]
 }

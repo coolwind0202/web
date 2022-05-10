@@ -3,64 +3,44 @@ import { Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-/**
- * `getUser`、`getUsers`で使うクエリに対する型情報
- */
-const discordUserWithProfile = Prisma.validator<Prisma.DiscordUserArgs>()({
+export const _accountQueryValidator = Prisma.validator<
+  Prisma.MemberAccountArgs
+>()({
   include: {
-    Profile: {
+    profile: {
       include: {
-        ProfileTag: {
-          include: {
-            tag: true,
-          },
-        },
+        clusters: true,
       },
     },
+    discord_user: true,
   },
 });
 
-export type DiscordUserWithProfile = Prisma.DiscordUserGetPayload<
-  typeof discordUserWithProfile
+export type MemberAccountWithPayload = Prisma.MemberAccountGetPayload<
+  typeof _accountQueryValidator
 >;
 
 /**
- * データベースから`User`オブジェクトを取得します。
- * @param discord_id 取得するユーザーのDiscord ID
- * @returns `User`または`null`のPromise
+ * データベースから`MemberAccount`オブジェクトを取得します。
+ * @param id 取得するメンバーの内部ID
  */
-const getUser = async (
-  discord_id: string,
-): Promise<DiscordUserWithProfile | null> => {
-  const result = await prisma.discordUser.findUnique({
-    where: { discord_id },
-    include: {
-      Profile: { include: { ProfileTag: { include: { tag: true } } } },
-    },
+export const getMemberAccount = async (
+  id: number,
+): Promise<MemberAccountWithPayload | null> => {
+  const result = await prisma.memberAccount.findUnique({
+    where: { id },
+    ..._accountQueryValidator,
   });
 
   return result;
 };
 
 /**
- * データベースから`User`オブジェクトのリストを取得します。
- * @returns `User`のリストのPromise
+ * データベースから`MemberAccount`オブジェクトのリストを取得します。
  */
-const getUsers = async (): Promise<DiscordUserWithProfile[]> => {
-  const result = await prisma.discordUser.findMany({
-    include: {
-      Profile: {
-        include: {
-          ProfileTag: {
-            include: {
-              tag: true,
-            },
-          },
-        },
-      },
-    },
-  });
+export const getMemberAccounts = async (): Promise<
+  MemberAccountWithPayload[]
+> => {
+  const result = await prisma.memberAccount.findMany(_accountQueryValidator);
   return excludeNull(result);
 };
-
-export { getUser, getUsers };

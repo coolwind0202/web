@@ -1,1 +1,0 @@
-export { UserTag } from './UserTag';

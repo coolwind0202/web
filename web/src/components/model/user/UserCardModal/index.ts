@@ -1,1 +1,0 @@
-export { UserCardModal } from './UserCardModal';

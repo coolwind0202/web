@@ -1,5 +1,7 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+
+import { accounts } from '@/utils/mock_data';
 
 import { IndexPage } from '.';
 
@@ -12,74 +14,5 @@ const Template: ComponentStory<typeof IndexPage> = (args) => <IndexPage {...args
 
 export const Primary = Template.bind({});
 Primary.args = {
-  users: [
-    {
-      discord: {
-        username: 'User',
-        discriminator: '1000',
-        avatar_url: 'https://i.pinimg.com/originals/52/d1/13/52d11372df35fd96aab8f6827e1ce205.jpg',
-      },
-      profile: {
-        about: '自己紹介テキスト',
-        tags: [],
-        friend_code: '1234-1234-1234',
-      },
-    },
-    {
-      discord: {
-        username: 'User-2',
-        discriminator: '2000',
-        avatar_url: '',
-      },
-      profile: {
-        about: '自己紹介テキスト',
-        tags: [
-          {
-            name: 'Tag-1',
-            id: '1',
-            color: '#707070',
-          },
-          {
-            name: 'Tag-2',
-            id: '2',
-            color: '#707070',
-          },
-          {
-            name: 'Tag-3',
-            id: '3',
-            color: '#707070',
-          },
-        ],
-        friend_code: '',
-      },
-    },
-    {
-      discord: {
-        username: 'User-3',
-        discriminator: '3000',
-        avatar_url: 'https://pbs.twimg.com/media/Dpw-95kUwAAswNa.jpg',
-      },
-      profile: {
-        about: '自己紹介テキスト',
-        tags: [
-          {
-            name: 'Tag-1',
-            id: '1',
-            color: '#707070',
-          },
-          {
-            name: 'Tag-2',
-            id: '2',
-            color: '#707070',
-          },
-          {
-            name: 'Tag-3',
-            id: '3',
-            color: '#707070',
-          },
-        ],
-        friend_code: '',
-      },
-    },
-  ],
+  members: Object.values(accounts),
 };

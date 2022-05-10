@@ -1,55 +1,62 @@
 import React from 'react';
-import styles from './IndexPage.module.css';
-import { Heading } from '@/components/ui/typography/Heading';
-import { NavBar } from '@/components/ui/nav/NavBar';
-import { PartialUserCardList } from '@/components/model/user/PartialUserCardList';
-import { PageLink } from '@/components/ui/nav/PageLink';
-import { ComponentProps, useState } from 'react';
-import { UserCardModal } from '@/components/model/user/UserCardModal';
-import { DiscordUserWithProfile } from '@/lib/prisma';
-import { useUserParameter } from '@/lib/hooks/useUserParameter';
+import { ComponentProps } from 'react';
+
 import { useRouter } from 'next/router';
-import { useTagListTab } from '@/lib/hooks/useTagListTab';
+
+import { MemberCardModal } from '@/components/model/member/account/MemberCardModal';
+import { PartialMemberCardList } from '@/components/model/member/account/PartialMemberCardList';
+import { NavBar } from '@/components/ui/nav/NavBar';
+import { PageLink } from '@/components/ui/nav/PageLink';
+import { Heading } from '@/components/ui/typography/Heading';
+import { useClusterTab } from '@/lib/hooks/useClusterTab';
+import { useMemberIdParameter } from '@/lib/hooks/useMemberIdParameter';
+import type { MemberAccountWithPayload } from '@/lib/prisma';
+
+import styles from './IndexPage.module.css';
 
 type HomeProps = {
-  users: DiscordUserWithProfile[];
+  members: MemberAccountWithPayload[];
 };
 
 const Link = (props: ComponentProps<typeof PageLink>) => (
   <PageLink {...props} className={styles.link} />
 );
 
-export const IndexPage: React.VFC<HomeProps> = ({ users }) => {
-  const modalUser = useUserParameter(users);
+export const IndexPage: React.VFC<HomeProps> = ({ members }) => {
+  const modalMember = useMemberIdParameter(members);
   const router = useRouter();
-  const { currentTab, tags, onTabChange } = useTagListTab(users);
+  const { currentTab, clusters, onTabChange } = useClusterTab(members);
   console.log(currentTab);
-  const onUserCardClicked = (user: DiscordUserWithProfile) => {
+  const handleMemberCardClick = (member: MemberAccountWithPayload) => {
     router.push({
       pathname: '/',
       query: {
-        user: user.discord_id,
+        member: member.id,
       },
     });
   };
-  const onModalClosed = () => {
+  const handleModalClose = () => {
     router.push('/');
   };
   return (
     <>
-      {modalUser && (
-        <UserCardModal user={modalUser} open={modalUser !== null} onClose={onModalClosed} />
+      {modalMember && (
+        <MemberCardModal
+          member={modalMember}
+          isOpen={modalMember !== null}
+          onClose={handleModalClose}
+        />
       )}
       <NavBar>
         <div className={styles.root}>
           <section className={styles.content}>
             <Heading>おすすめユーザー</Heading>
-            <PartialUserCardList users={users} onClick={onUserCardClicked} />
+            <PartialMemberCardList members={members} onClick={handleMemberCardClick} />
             <Link href='/'>もっと見る →</Link>
           </section>
           <section className={styles.content}>
             <Heading>タグから探す</Heading>
-            <PartialUserCardList users={users} onClick={onUserCardClicked} />
+            <PartialMemberCardList members={members} onClick={handleMemberCardClick} />
             <Link href='/'>もっと見る →</Link>
           </section>
         </div>

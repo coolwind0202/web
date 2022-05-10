@@ -1,1 +1,0 @@
-export { PartialUserCard } from './PartialUserCard';
