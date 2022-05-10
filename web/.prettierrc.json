@@ -4,5 +4,17 @@
   "semi": true,
   "singleQuote": true,
   "jsxSingleQuote": true,
-  "printWidth": 100
+  "printWidth": 100,
+  "importOrder": [
+    "^@core/(.*)$",
+    "react",
+    "<THIRD_PARTY_MODULES>",
+    "^@/(.*)$",
+    "^@server/(.*)$",
+    "^@ui/(.*)$",
+    "^[./]",
+    "(.*).module.css"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }
