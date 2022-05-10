@@ -1,10 +1,15 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
-import theme from '../mui_config/theme';
+import { server } from '__mocks__/msw';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
+
 import createEmotionCache from '../mui_config/createEmotionCache';
+import theme from '../mui_config/theme';
 
 export default class MyDocument extends Document {
   render() {
+    if (process.env.NODE_ENV === 'development') {
+      server.listen();
+    }
     return (
       <Html lang='ja'>
         <Head>
