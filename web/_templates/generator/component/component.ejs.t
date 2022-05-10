@@ -1,9 +1,11 @@
 ---
-to: src/components/<%= directory %>/<%= subdirectory %>/<%= h.changeCase.pascal(component_name) %>/<%= h.changeCase.pascal(component_name) %>.tsx
+to: <%= path %>/<%= h.changeCase.pascal(component_name) %>/<%= h.changeCase.pascal(component_name) %>.tsx
 ---
 
 import React from 'react'
+
 import clsx from 'clsx';
+
 import styles from './<%= h.changeCase.pascal(component_name) %>.module.css';
 
 type <%= h.changeCase.pascal(component_name) %>Props = {
