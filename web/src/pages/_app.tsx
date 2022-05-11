@@ -38,4 +38,11 @@ function MyApp(props: MyAppProps) {
   );
 }
 
+if (typeof window === 'undefined') {
+  if (process.env.NODE_ENV === 'development') {
+    const { server } = require('__mocks__/msw');
+    server.listen();
+  }
+}
+
 export default MyApp;
