@@ -1,0 +1,19 @@
+.root {
+}
+
+.circle {
+  overflow: hidden;
+  height: 64px;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  border-radius: 100%;
+}
+
+.content {
+  text-align: center;
+  margin: 0; /* figure周りにmarginが出来てたので打ち消し*/
+}
+
+.icon {
+  height: 100%;
+}

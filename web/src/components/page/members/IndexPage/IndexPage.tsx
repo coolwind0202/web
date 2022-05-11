@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 
 import { MemberCardModal } from '@/components/model/member/account/MemberCardModal';
 import { PartialMemberCardList } from '@/components/model/member/account/PartialMemberCardList';
+import { ClusterTabPanel } from '@/components/model/member/cluster/ClusterTabPanel';
 import { NavBar } from '@/components/ui/nav/NavBar';
 import { PageLink } from '@/components/ui/nav/PageLink';
 import { Heading } from '@/components/ui/typography/Heading';
@@ -56,7 +57,12 @@ export const IndexPage: React.VFC<HomeProps> = ({ members }) => {
           </section>
           <section className={styles.content}>
             <Heading>タグから探す</Heading>
-            <PartialMemberCardList members={members} onClick={handleMemberCardClick} />
+            <ClusterTabPanel
+              clusters={clusters}
+              currentTab={currentTab}
+              onTabChange={onTabChange}
+            />
+            <PartialMemberCardList members={currentTab.members} onClick={handleMemberCardClick} />
             <Link href='/'>もっと見る →</Link>
           </section>
         </div>

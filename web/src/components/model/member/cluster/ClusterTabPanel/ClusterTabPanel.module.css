@@ -1,0 +1,9 @@
+.root {
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  padding: 0; /* リスト左の空白を詰める */
+}
