@@ -1,8 +1,14 @@
 .root {
-  width: 72%;
+  width: 90%;
   text-align: center;
 
   padding: 0.8rem 0 0.8rem 0;
   border-top: 2px solid var(--font-light-mode);
   border-bottom: 2px solid var(--font-light-mode);
+}
+
+@media (min-width: 360px) {
+  .root {
+    width: 72%;
+  }
 }
