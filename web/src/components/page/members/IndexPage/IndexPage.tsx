@@ -24,10 +24,12 @@ const Link = (props: ComponentProps<typeof PageLink>) => (
 );
 
 export const IndexPage: React.VFC<HomeProps> = ({ members }) => {
+  console.log('', members); // ⭕ this line is executed correctly
+  console.log(members); // ❌ this line make an error
+
   const modalMember = useMemberIdParameter(members);
   const router = useRouter();
   const { currentTab, clusters, onTabChange } = useClusterTab(members);
-  console.log(currentTab);
   const handleMemberCardClick = (member: MemberAccountWithPayload) => {
     router.push({
       pathname: '/',
